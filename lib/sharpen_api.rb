@@ -1,5 +1,4 @@
 require 'httparty'
-require 'csv'
 require 'json'
 
 ##
@@ -28,14 +27,15 @@ module SharpenApi
     return response
   end
 
- def self.agent_data_csv(json_response)
-      csv_string = CSV.generate do |csv|
+ def self.agent_data_array(json_response)
+    filtered_events = Array.new
       json_response['data'].each do |entry|
-          csv << entry[:userName]
-          csv << entry[:event]
-          csv << entry[:startTime]+'.000'
+          event = Array.new
+          event <<  entry['agentName']
+          event <<  entry['startTime']+".000"
+          event <<  entry['event']
+          filtered_events << event
         end
-      end
-    return csv_string
+      return filtered_events
    end
 end
