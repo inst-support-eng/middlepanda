@@ -38,16 +38,16 @@ module MonetDataCollectorApi
     # message for updating Monet with new agent status from an array of hashes, hashes of ageent Salesforce ID and New Status
     def self.send_agent_states(agent_status_updates)
         unless agent_status_updates.empty?
-        message = {
-            userName:ENV['MONET_USERNAME'],
-            password: ENV['MONET_PASSSWORD'],
-            agentStateCollection: {
-                AgentStateObj: agent_status_updates 
+            message = {
+                userName:ENV['MONET_USERNAME'],
+                password: ENV['MONET_PASSSWORD'],
+                agentStateCollection: {
+                    AgentStateObj: agent_status_updates 
+                    }
                 }
-             }
-        response = @monet_client.call(:send_agent_state_records_array, message: message) 
-        return response
-            end
+            response = @monet_client.call(:send_agent_state_records_array, message: message) 
+            return response
+        end
     end
     
     def self.get_last_agent_state

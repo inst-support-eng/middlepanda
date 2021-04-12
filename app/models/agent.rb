@@ -40,7 +40,7 @@ class Agent < ApplicationRecord
                                 when /Auto Pause/
                                         current_status = "Auto Pause"
                                 else
-                                        current_status = 'Other'
+                                        current_status = 'Pause - Other'
                                 end
                             else
                                 current_status = 'active'
