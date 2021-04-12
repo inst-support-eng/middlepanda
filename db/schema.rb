@@ -10,6 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_08_221002) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "agents", force: :cascade do |t|
+    t.string "name"
+    t.string "sf_id"
+    t.string "sharpen_username"
+    t.string "last_status"
+    t.index ["name"], name: "index_agents_on_name"
+    t.index ["sf_id"], name: "index_agents_on_sf_id"
+  end
 
 end

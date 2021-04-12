@@ -1,17 +1,13 @@
 require 'httparty'
 require 'json'
 
-##
-# Sharpen APIs for sending sms text messages
 module SharpenApi
   include HTTParty
-  base_uri 'https://api.fathomvoice.com/'
+  base_uri 'https://api.sharpen.cx/v1/'
 
-  ##
-  # Gather agent availability historical data 
-  # from Sharpen
-  def self.agent_data(endTime, startTime)
-    url = "#{base_uri}/V2/query/"
+  ## Depricated endpoints (apparently) - use v1 api instead
+  def self.old_agent_interactions(endTime, startTime)
+    url = "https://api.fathomvoice.com/V2/query/"
 
     headers = {
       'content-type' => 'application/json'
@@ -27,15 +23,31 @@ module SharpenApi
     return response
   end
 
- def self.agent_data_array(json_response)
+  ## ~depricated endpoint for gathering all Agents in Sharpen
+  # https://api.sharpen.cx/docs/#tag/Users
+  def self.old_get_agents
+    url = "https://api.fathomvoice.com/V2/queues/getAgents/"
+    headers = {
+      'content-type' => 'application/json',
+    }
+    options = {
+      'cKey1' => ENV['CKEY1'],
+      'cKey2' => ENV['CKEY2']
+    }
+
+    response = JSON.parse(SharpenApi.post(url, headers: headers, body: options.to_json))
+    return response['getAgentsData']
+  end
+
+ def self.agent_interaction_array(json_response)
     filtered_events = Array.new
       json_response['data'].each do |entry|
           event = Array.new
           event <<  entry['agentName']
-          event <<  entry['startTime']+".000"
           event <<  entry['event']
+          event <<  entry['startTime']+".000"
           filtered_events << event
-        end
-      return filtered_events
-   end
+      end
+    return filtered_events
+  end
 end

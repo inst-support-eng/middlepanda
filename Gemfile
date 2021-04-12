@@ -5,8 +5,8 @@ ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# Use Postgres as the database for Active Record
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -17,8 +17,11 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+# Gem for timing and scheduling recurring tasks
+gem 'clockwork'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
+gem 'sidekiq'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -30,6 +33,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # gem for http requests
 gem 'httparty'
+
+# gem for making SOAP requests easier. Read more: https://www.savonrb.com/version1/executing-soap-requests.html
+gem 'savon', '~> 2.0'
+
+# provides methods for benchmarking ruby code and giving detailed reports on time taken for each task
+gem 'benchmark'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
