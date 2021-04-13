@@ -9,5 +9,5 @@ module Clockwork
       end
 
       every(1.day, 'AgentsAddWorker.perform_async', :at => '00:00') {AgentsAddWorker.perform_async}
-      every(1.seconds, 'AgentsStatusWorker.perform_async') {AgentsStatusWorker.perform_async}
+      every(4.seconds, 'AgentsStatusWorker.perform_async') {AgentsStatusWorker.perform_async}
 end
