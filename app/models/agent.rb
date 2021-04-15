@@ -6,7 +6,7 @@ class Agent < ApplicationRecord
     def self.sync_new_agents
         sharpen_users = SharpenApi.old_get_agents
         sharpen_users.each do |a|
-            if (a.include? 'externalCRMID') && ['L1 Support Engineer', 'L1 Support Newbies'].include?(a['userGroupName'])
+            if (a.include? 'externalCRMID') && (['L1 Support Engineer', 'L1 Support Newbies'].include?(a['userGroupName']))
                 #identify and create new users based on unique username on agents in Sharpen
                 agent = find_by(sharpen_username: a['username']) || new
                     if agent.new_record?
