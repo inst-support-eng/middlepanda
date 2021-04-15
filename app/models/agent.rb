@@ -26,7 +26,7 @@ class Agent < ApplicationRecord
         sharpen_users = SharpenApi.old_get_agents
         timestamp = DateTime.now
         sharpen_users.each do |sharpen_agent|
-            if (sharpen_agent.include? 'externalCRMID') && ['L1 Support Engineer','L1 Support - Newbies', 'L1 Support - Bilingual'].include? (sharpen_agent['userGroupName'])
+            if (sharpen_agent.include? 'externalCRMID') && (['L1 Support Engineer','L1 Support - Newbies', 'L1 Support - Bilingual']).include? (sharpen_agent['userGroupName']))
                 check_agent = Agent.find_by(:sharpen_username => sharpen_agent['username'])
                 #determine current status
                 unless check_agent == nil
