@@ -6,7 +6,7 @@ class Agent < ApplicationRecord
     def self.sync_new_agents
         sharpen_users = SharpenApi.old_get_agents
         sharpen_users.each do |a|
-            if (a.include? 'externalCRMID') && (['L1 Support Engineer', 'L1 Support - Newbies','L1 Support - Bilingual'].include?(a['userGroupName']))
+            if (a.include? 'externalCRMID') && (['L1 Support Engineer', 'L1 Support - Newbies','L1 Support - Bilingual'].include?(a ['userGroupName']))
                 #identify and create new users based on unique username on agents in Sharpen
                 agent = find_by(sharpen_username: a['username']) || new
                     if agent.new_record?
@@ -26,7 +26,7 @@ class Agent < ApplicationRecord
         sharpen_users = SharpenApi.old_get_agents
         timestamp = DateTime.now
         sharpen_users.each do |sharpen_agent|
-            if (a.include? 'externalCRMID') && (['L1 Support Engineer', 'L1 Support - Newbies','L1 Support - Bilingual'].include?(a['userGroupName']))
+            if (sharpen_agent.include? 'externalCRMID') && (['L1 Support Engineer', 'L1 Support - Newbies','L1 Support - Bilingual'].include?(sharpen_agent['userGroupName']))
                 check_agent = Agent.find_by(:sharpen_username => sharpen_agent['username'])
                 #determine current status
                 unless check_agent == nil
